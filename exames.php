@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consulta</title>
+  <title>Cadastro de Exames</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
@@ -18,71 +18,48 @@
 
 <body>
   <div class="container">
+  <form action="classes/controller/ExamesController.php" method="POST">
     <div class="row">
       <div class="col">
         <br>
-        <h2 style="text-align: center;">Dados do Paciente</h2>
+        <h2 style="text-align: center;">Cadastro de Exames </h2>
+        <?php
+          include("classes/config/Conexao.class.php");
+          include("classes/dao/PessoasDAO.class.php");
+          $objDAO = new PessoasDAO();
+          $consulta = $objDAO->consultarCodigoPessoas($_GET['id']);
+        ?>
         <hr>
+        <input type="hidden" name="inputPaciente" value="<?php echo $consulta['id']; ?>" />
+        <input type="text" value="<?php echo $consulta['nome']; ?>" class="form-control" disabled>
       </div>
     </div>
     <div class="row">
       <div class="col-2">
-        <label for="cpf">CPF:</label>
-        <input type="cpf" class="form-control">
+        <label for="">Data:</label>
+        <input type="date" class="form-control" name="inputDtExame">
       </div>
       <div class="col-4">
-        <label for="">Nome:</label>
-        <input type="text" class="form-control">
+        <label for="">Exame:</label>
+        <input type="text" class="form-control" name="inputExame">
       </div>
-      <div class="col-2">
-        <label for="">Nascimento:</label>
-        <input type="date" name="" id="" class="form-control">
+      <div class="col-3">
+        <label for="">Medico:</label>
+        <input type="text" name="" id="" class="form-control" name="inputMedico">
       </div>
-      <div class="col-4">
-        <label for="">Mae:</label>
-        <input type="text" class="form-control">
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col">
-        <h2 style="text-align: center;">Endereço do Paciente</h2>
-        <hr>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-4">
-        <label for="">Endereço:</label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="col-1">
-        <label for="">Numero:</label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="col-2">
-        <label for="">Complemento:</label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="col-2">
-        <label for="">Cidade:</label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="col-1">
-        <label for="">UF:</label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="col-2">
-        <label for="">C.E.P.:</label>
-        <input type="text" class="form-control">
+      <div class="col-3">
+        <label for="">Laboratorio:</label>
+        <input type="text" class="form-control" name="inputLaboratorio">
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-6">
-        <input type="submit" class="btn btn-success" value="Cadastrar" name="btnCadastrarPaciente">
-        <input type="reset" class="btn btn-danger" value="Cancelar" name="btnCancelarPacient">
+        <input type="submit" class="btn btn-success" value="Cadastrar" name="btnCadastrarExame">
+        <input type="submit" class="btn btn-danger" value="Cancelar" name="btnCancelar">
       </div>
     </div>
+  </form>
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
